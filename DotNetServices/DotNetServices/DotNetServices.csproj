@@ -4,7 +4,7 @@
     <Title>PolyHx.DotNetServices</Title>
     <Description>.Net Services for PolyHx's micro services</Description>
     <AssemblyTitle>PolyHx.DotNetServices</AssemblyTitle>
-    <PackageVersion>1.1.1</PackageVersion>
+    <PackageVersion>1.2.0</PackageVersion>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>PolyHx.DotNetServices</AssemblyName>
     <OutputType>Library</OutputType>

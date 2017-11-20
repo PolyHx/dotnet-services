@@ -1,39 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Newtonsoft.Json;
 
 namespace PolyHxDotNetServices.Mail.Inputs
 {
     public class SendMailInput
     {
+        [JsonProperty("from")]
         public String From { get; set; }
 
+        [JsonProperty("to")]
         public String[] To { get; set; }
 
+        [JsonProperty("subject")]
         public String Subject { get; set; }
 
+        [JsonProperty("text")]
         public String Text { get; set; }
 
+        [JsonProperty("html")]
         public String Html { get; set; }
 
+        [JsonProperty("template")]
         public String Template { get; set; }
 
+        [JsonProperty("variables")]
         public Object Variables { get; set; }
 
-        public Dictionary<string, string> ToDictionnary()
+        public string ToString()
         {
-            return GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                .ToDictionary(prop => prop.Name, prop =>
-                {
-                    var val = prop.GetValue(this, null);
-
-                    if (val is string)
-                        return val as string;
-
-                    return JsonConvert.SerializeObject(val);
-                });
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

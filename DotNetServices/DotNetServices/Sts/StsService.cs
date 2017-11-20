@@ -85,7 +85,7 @@ namespace PolyHxDotNetServices.Sts
             ApiUrl = Environment.GetEnvironmentVariable("STS_API_URL");
             _clientId = Environment.GetEnvironmentVariable("STS_CLIENT_ID");
             _clientSecret = Environment.GetEnvironmentVariable("STS_CLIENT_SECRET");
-            _clientScopes = Environment.GetEnvironmentVariable("STS_CLIENT_SECRET");
+            _clientScopes = Environment.GetEnvironmentVariable("STS_CLIENT_SCOPE");
         }
 
         public async Task<string> GetAccessToken()

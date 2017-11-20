@@ -27,7 +27,7 @@ namespace DotNetServicesTests.Mail
             _mockHttp = new MockHttpMessageHandler();
             _stsService = new StsService(new HttpClient(_mockHttp));
             _mailService = new MailService(new StsService(new HttpClient(_mockHttp)), new HttpClient(_mockHttp));
-            _mockHttp.When(_mailService.ApiUrl + "/mail")
+            _mockHttp.When(_mailService.ApiUrl + "/email")
                 .Respond("application/json", "{}");
             _mockHttp.When($"{_stsService.ApiUrl}/connect/token")
                 .Respond("application/json", "{ \"access_token\": \"token\" }");

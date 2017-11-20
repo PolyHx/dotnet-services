@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using PolyHxDotNetServices.Sts;
 using PolyHxDotNetServices.Mail.Inputs;
@@ -25,15 +24,14 @@ namespace PolyHxDotNetServices.Mail
 
         public async Task<bool> SendEmail(SendMailInput input)
         {
-            var dictionary = input.ToDictionnary();
-            var content = new FormUrlEncodedContent(dictionary);
+            var content = new StringContent(input.ToString(), Encoding.UTF8, "application/json");
 
             HttpResponseMessage result;
             try
             {
                 var token = await _stsService.GetAccessToken();
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                result = await _httpClient.PostAsync(ApiUrl + "/mail", content);
+                result = await _httpClient.PostAsync(ApiUrl + "/email", content);
             }
             catch (Exception e)
             {
@@ -41,7 +39,7 @@ namespace PolyHxDotNetServices.Mail
                 throw;
             }
 
-            return result.StatusCode == HttpStatusCode.OK;
+            return result.StatusCode == HttpStatusCode.OK || result.StatusCode == HttpStatusCode.Created;
         }
     }
 }
